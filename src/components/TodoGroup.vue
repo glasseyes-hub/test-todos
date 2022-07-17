@@ -14,8 +14,5 @@ import TodoItem from "./TodoItem.vue";
 export default {
   components: { TodoItem },
   props: ["title", "items"],
-  data() {
-    return {};
-  },
 };
 </script>

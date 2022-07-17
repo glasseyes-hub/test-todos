@@ -1,6 +1,6 @@
 <template>
   <v-list-item class="item rounded-xl px-2">
-    <v-btn class="mr-2" icon @click="$emit('select', item)">
+    <v-btn class="mr-2" icon @click="select(item)">
       <v-icon color="primary">{{
         item.completed ? icons.completed : icons.active
       }}</v-icon>
@@ -47,6 +47,12 @@ export default {
         unarchive: mdiArchiveArrowUp,
       },
     };
+  },
+  methods: {
+    select(item) {
+      console.log(item);
+      this.$store.commit("add", item);
+    },
   },
 };
 </script>

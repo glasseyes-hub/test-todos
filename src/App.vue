@@ -2,7 +2,7 @@
   <v-app>
     <div class="bg"></div>
 
-    <v-main class="main mt-16">
+    <v-main class="my-16">
       <TodoList class="todo" />
     </v-main>
   </v-app>
@@ -21,12 +21,16 @@ export default {
   data() {
     return {};
   },
+
+  mounted() {
+    this.$store.dispatch("fetchAll");
+  },
 };
 </script>
 
 <style scoped>
 .bg {
-  position: absolute;
+  position: fixed;
   width: 100vw;
   height: 100vh;
   background-position: fixed;

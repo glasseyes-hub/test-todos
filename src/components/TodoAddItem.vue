@@ -2,9 +2,10 @@
   <v-text-field
     solo
     rounded
+    flat
     placeholder="Новая задача"
     class="text-field pl-0"
-    v-model="todo"
+    v-model="text"
   >
     <template #append>
       <v-btn
@@ -13,7 +14,8 @@
         plain
         color="primary"
         :loading="false"
-        :disabled="!todo.length"
+        :disabled="!text.length"
+        @click="add()"
         >добавить</v-btn
       >
     </template>
@@ -24,14 +26,29 @@
 import { mdiCircleOutline, mdiCheckboxMarkedCircleOutline } from "@mdi/js";
 
 export default {
-  props: ["text", "completed"],
   data() {
     return {
+      text: "",
       icons: {
         active: mdiCircleOutline,
         completed: mdiCheckboxMarkedCircleOutline,
       },
     };
+  },
+  computed: {
+    lastId() {
+      return this.$store.getters.lastId;
+    },
+  },
+  methods: {
+    add() {
+      this.$store.commit("add", {
+        id: this.$store.getters.lastId + 1,
+        text: this.text,
+        completed: false,
+        archived: false,
+      });
+    },
   },
 };
 </script>
