@@ -1,12 +1,22 @@
 <template>
   <div class="todolist">
-    <v-container class="todolist__container">
-      <v-row justify="center">
+    <v-container class="todolist__container rounded-xl px-6 py-6">
+      <v-row justify="center mb-6 ">
         <v-col cols="12">
+          <div class="d-flex justify-center mb-6">
+            <h1 class="h1 white--text">todoapp</h1>
+          </div>
+          <v-divider></v-divider>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="12">
+          <h2 class="h2 white--text mb-4 ml-4">Создать задачу</h2>
           <v-text-field
             solo
             rounded
             placeholder="Новая задача"
+            flat
             class="text-field pl-0"
             v-model="todo"
           >
@@ -18,7 +28,7 @@
                 color="primary"
                 :loading="false"
                 :disabled="!todo.length"
-                >добавить</v-btn
+                >создать</v-btn
               >
             </template>
           </v-text-field>
@@ -26,12 +36,11 @@
       </v-row>
       <v-row justify="center">
         <v-col cols="12">
-          <v-card class="white rounded-xl px-4" cols="4">
-            <v-list flat subheader>
-              <TodoGroup title="Активные" :items="active" />
-              <TodoGroup title="Выполненные" :items="completed" />
-              <TodoGroup title="Архив" :items="archived" />
-            </v-list>
+          <h2 class="h2 white--text mb-4 ml-4">Ваши задачи</h2>
+          <v-card flat class="white rounded-xl px-4" cols="4">
+            <TodoGroup title="Активные" :items="active" />
+            <TodoGroup title="Выполненные" :items="completed" />
+            <TodoGroup title="Архив" :items="archived" />
           </v-card>
         </v-col>
       </v-row>
@@ -101,7 +110,9 @@ export default {
   width: 100%;
 }
 .todolist__container {
-  width: 540px;
+  width: 600px;
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(25px);
 }
 
 .text-field ::v-deep(.v-input__slot) {

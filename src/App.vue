@@ -1,15 +1,8 @@
 <template>
   <v-app>
-    <v-img
-      class="bg"
-      height="400"
-      src="http://www.cita.com.ua/img/ntours/big/4/1599228157.jpg"
-    ></v-img>
+    <div class="bg"></div>
 
-    <v-app-bar app>
-      <span class="title"> Todo App </span>
-    </v-app-bar>
-    <v-main class="mt-16 h-screen">
+    <v-main class="main mt-16">
       <TodoList class="todo" />
     </v-main>
   </v-app>
@@ -34,5 +27,9 @@ export default {
 <style scoped>
 .bg {
   position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-position: fixed;
+  background-image: url(http://www.cita.com.ua/img/ntours/big/4/1599228157.jpg);
 }
 </style>
