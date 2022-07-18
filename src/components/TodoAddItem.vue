@@ -42,12 +42,14 @@ export default {
   },
   methods: {
     add() {
-      this.$store.commit("add", {
-        id: this.$store.getters.lastId + 1,
+      this.$store.dispatch("add", {
+        id: +this.$store.getters.nextId,
         text: this.text,
         completed: false,
         archived: false,
       });
+
+      this.text = "";
     },
   },
 };
