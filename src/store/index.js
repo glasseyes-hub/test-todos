@@ -39,7 +39,7 @@ const ITEMS = {
 export default new Vuex.Store({
   state() {
     return {
-      items: [],
+      items: {},
     };
   },
   getters: {
@@ -59,7 +59,9 @@ export default new Vuex.Store({
         .reverse();
     },
     nextId: (state) => {
-      return Math.max(...Object.keys(state.items)) + 1;
+      const keys = Object.keys(state.items);
+
+      return keys.length ? Math.max(...keys) + 1 : 1;
     },
   },
   mutations: {
@@ -73,25 +75,31 @@ export default new Vuex.Store({
       state.items[item.id] = item;
     },
     remove(state, id) {
-      const items = state.items;
+      delete state.items[id];
 
-      delete items[id];
-
-      state.items = { ...items };
+      state.items = { ...state.items };
     },
   },
   actions: {
     fetchAll({ commit }) {
       commit("set", ITEMS);
+
+      console.log("fetchAll");
     },
     add({ commit }, item) {
       commit("add", item);
+
+      console.log("add");
     },
     update({ commit }, item) {
       commit("update", item);
+
+      console.log("update");
     },
     remove({ commit }, id) {
       commit("remove", id);
+
+      console.log("remove");
     },
   },
 });
