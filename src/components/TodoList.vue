@@ -18,7 +18,7 @@
       <v-row justify="center">
         <v-col cols="12">
           <h2 class="h2 white--text mb-4 ml-4">Ваши задачи</h2>
-          <v-card flat class="white rounded-xl px-4" cols="4">
+          <v-card flat class="white rounded-xl pa-4" cols="4">
             <TodoGroup title="Активные" :items="active" />
             <TodoGroup title="Выполненные" :items="completed" />
             <TodoGroup title="Архив" :items="archived" />
@@ -40,6 +40,9 @@ export default {
       todo: "",
     };
   },
+  mounted() {
+    this.$store.dispatch("fetchAll");
+  },
   computed: {
     active() {
       return this.$store.getters.active;
@@ -49,6 +52,31 @@ export default {
     },
     archived() {
       return this.$store.getters.archived;
+    },
+  },
+  methods: {
+    onAdd(text) {
+      this.$store.dispatch("add", {
+        id: +this.$store.getters.nextId,
+        text,
+        completed: false,
+        archived: false,
+      });
+    },
+    onSelect(item) {
+      this.$store.dispatch("update", {
+        ...item,
+        completed: !item.completed,
+      });
+    },
+    onArchive(item) {
+      this.$store.dispatch("update", {
+        ...item,
+        archived: !item.archived,
+      });
+    },
+    onRemove(item) {
+      this.$store.dispatch("remove", item.id);
     },
   },
 };

@@ -72,10 +72,10 @@ export default new Vuex.Store({
     update(state, item) {
       state.items[item.id] = item;
     },
-    remove(state, item) {
+    remove(state, id) {
       const items = state.items;
 
-      delete items[item.id];
+      delete items[id];
 
       state.items = { ...items };
     },
@@ -90,8 +90,8 @@ export default new Vuex.Store({
     update({ commit }, item) {
       commit("update", item);
     },
-    remove({ commit }, item) {
-      commit("remove", item);
+    remove({ commit }, id) {
+      commit("remove", id);
     },
   },
 });
