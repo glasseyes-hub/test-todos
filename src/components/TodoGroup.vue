@@ -1,11 +1,14 @@
 <template>
-  <div>
-    <v-list flat subheader>
-      <v-subheader>{{ title }}</v-subheader>
+  <v-list flat subheader>
+    <v-subheader>{{ title }}</v-subheader>
 
+    <template v-if="items.length">
       <TodoItem v-for="item in items" :key="item.id" :item="item" />
-    </v-list>
-  </div>
+    </template>
+    <div v-else class="d-flex justify-center">
+      <span class="caption grey--text">Список пуст</span>
+    </div>
+  </v-list>
 </template>
 
 <script>

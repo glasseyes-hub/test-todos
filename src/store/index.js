@@ -6,7 +6,7 @@ Vue.use(Vuex);
 const ITEMS = {
   1: {
     id: 1,
-    text: "Задача 1 123  123123 123 12312312312312 31 wf wef wf wef wefw efwef ",
+    text: "Задача 1",
     completed: false,
     archived: false,
   },
@@ -30,7 +30,7 @@ const ITEMS = {
   },
   5: {
     id: 5,
-    text: "Задача 5 qwd qwd qwd qwd qwdqwdq dqwd qwd qd",
+    text: "Задача 5",
     completed: true,
     archived: true,
   },
@@ -44,17 +44,19 @@ export default new Vuex.Store({
   },
   getters: {
     active: (state) => {
-      return Object.values(state.items).filter(
-        (item) => !item.completed && !item.archived
-      );
+      return Object.values(state.items)
+        .filter((item) => !item.completed && !item.archived)
+        .reverse();
     },
     completed: (state) => {
-      return Object.values(state.items).filter(
-        (item) => item.completed && !item.archived
-      );
+      return Object.values(state.items)
+        .filter((item) => item.completed && !item.archived)
+        .reverse();
     },
     archived: (state) => {
-      return Object.values(state.items).filter((item) => item.archived);
+      return Object.values(state.items)
+        .filter((item) => item.archived)
+        .reverse();
     },
     nextId: (state) => {
       return Math.max(...Object.keys(state.items)) + 1;
@@ -67,8 +69,15 @@ export default new Vuex.Store({
     add(state, item) {
       state.items = { ...state.items, [item.id]: item };
     },
-    delete(state, item) {
+    update(state, item) {
       state.items[item.id] = item;
+    },
+    remove(state, item) {
+      const items = state.items;
+
+      delete items[item.id];
+
+      state.items = { ...items };
     },
   },
   actions: {
@@ -77,6 +86,12 @@ export default new Vuex.Store({
     },
     add({ commit }, item) {
       commit("add", item);
+    },
+    update({ commit }, item) {
+      commit("update", item);
+    },
+    remove({ commit }, item) {
+      commit("remove", item);
     },
   },
 });
