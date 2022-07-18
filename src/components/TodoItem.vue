@@ -1,6 +1,6 @@
 <template>
   <v-list-item class="item rounded-xl px-2">
-    <v-btn icon class="mr-2" @click="select(item)">
+    <v-btn icon class="mr-2" @click="$emit('select', item)">
       <v-icon color="primary">{{
         item.completed ? icons.completed : icons.active
       }}</v-icon>
@@ -9,14 +9,12 @@
       <v-list-item-title>{{ item.text }}</v-list-item-title>
     </v-list-item-content>
     <div class="controls ml-2">
-      <v-btn icon rounded small plain color="primary" @click="archive(item)">
-        <v-icon color="grey">{{
-          item.archived ? icons.unarchive : icons.archive
-        }}</v-icon>
-      </v-btn>
-      <v-btn icon rounded small plain color="primary" @click="remove(item)">
-        <v-icon color="grey">{{ icons.delete }}</v-icon>
-      </v-btn>
+      <TodoItemButton :icon="icons.edit" @click="$emit('edit', item)" />
+      <TodoItemButton
+        :icon="item.archived ? icons.unarchive : icons.archive"
+        @click="$emit('archive', item)"
+      />
+      <TodoItemButton :icon="icons.remove" @click="$emit('remove', item.id)" />
     </div>
   </v-list-item>
 </template>
@@ -28,9 +26,12 @@ import {
   mdiArchiveArrowDownOutline,
   mdiArchiveArrowUp,
   mdiTrashCanOutline,
+  mdiPlaylistEdit,
 } from "@mdi/js";
+import TodoItemButton from "./TodoItemButton.vue";
 
 export default {
+  components: { TodoItemButton },
   props: ["item"],
   data() {
     return {
@@ -39,38 +40,10 @@ export default {
         completed: mdiCheckboxMarkedCircleOutline,
         archive: mdiArchiveArrowDownOutline,
         unarchive: mdiArchiveArrowUp,
-        delete: mdiTrashCanOutline,
+        remove: mdiTrashCanOutline,
+        edit: mdiPlaylistEdit,
       },
     };
-  },
-  methods: {
-    select(item) {
-      try {
-        this.$store.dispatch("update", {
-          ...item,
-          completed: !item.completed,
-        });
-      } catch (e) {
-        console.warn(e);
-      }
-    },
-    archive(item) {
-      try {
-        this.$store.dispatch("update", {
-          ...item,
-          archived: !item.archived,
-        });
-      } catch (e) {
-        console.warn(e);
-      }
-    },
-    remove(item) {
-      try {
-        this.$store.dispatch("remove", item.id);
-      } catch (e) {
-        console.warn(e);
-      }
-    },
   },
 };
 </script>

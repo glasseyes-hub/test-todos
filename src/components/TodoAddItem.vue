@@ -15,7 +15,7 @@
         color="primary"
         :loading="false"
         :disabled="!text.length"
-        @click="add()"
+        @click="add"
         >добавить</v-btn
       >
     </template>
@@ -23,31 +23,16 @@
 </template>
 
 <script>
-import { mdiCircleOutline, mdiCheckboxMarkedCircleOutline } from "@mdi/js";
-
 export default {
   data() {
     return {
       text: "",
-      icons: {
-        active: mdiCircleOutline,
-        completed: mdiCheckboxMarkedCircleOutline,
-      },
     };
   },
-  computed: {
-    lastId() {
-      return this.$store.getters.lastId;
-    },
-  },
+
   methods: {
     add() {
-      this.$store.dispatch("add", {
-        id: +this.$store.getters.nextId,
-        text: this.text,
-        completed: false,
-        archived: false,
-      });
+      this.$emit("add", this.text);
 
       this.text = "";
     },
