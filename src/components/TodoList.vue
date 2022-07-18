@@ -40,9 +40,7 @@ export default {
       todo: "",
     };
   },
-  mounted() {
-    this.$store.dispatch("fetchAll");
-  },
+
   computed: {
     active() {
       return this.$store.getters.active;
