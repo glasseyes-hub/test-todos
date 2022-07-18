@@ -23,6 +23,9 @@
             <TodoGroup title="Выполненные" :items="completed" />
             <TodoGroup title="Архив" :items="archived" />
           </v-card>
+          <div class="d-flex justify-center mt-6">
+            <v-btn rounded plain @click="onSave">Сохранить</v-btn>
+          </div>
         </v-col>
       </v-row>
     </v-container>
@@ -75,6 +78,9 @@ export default {
     },
     onRemove(item) {
       this.$store.dispatch("remove", item.id);
+    },
+    onSave() {
+      this.$store.dispatch("save");
     },
   },
 };

@@ -83,23 +83,27 @@ export default new Vuex.Store({
   actions: {
     fetchAll({ commit }) {
       commit("set", ITEMS);
-
-      console.log("fetchAll");
     },
     add({ commit }, item) {
       commit("add", item);
-
-      console.log("add");
     },
     update({ commit }, item) {
       commit("update", item);
-
-      console.log("update");
     },
     remove({ commit }, id) {
       commit("remove", id);
-
-      console.log("remove");
+    },
+    save({ state }) {
+      console.log(
+        Object.values(state.items).map((item) => {
+          return {
+            field_num: item.id,
+            field_value: item.text,
+            field_completed: item.completed,
+            field_archived: item.archived,
+          };
+        })
+      );
     },
   },
 });
