@@ -23,7 +23,11 @@ export default {
   },
 
   mounted() {
-    this.$store.dispatch("fetchAll");
+    try {
+      this.$store.dispatch("fetchAll");
+    } catch (e) {
+      console.warn(e);
+    }
   },
 };
 </script>

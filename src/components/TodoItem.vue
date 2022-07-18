@@ -45,19 +45,31 @@ export default {
   },
   methods: {
     select(item) {
-      this.$store.dispatch("update", {
-        ...item,
-        completed: !item.completed,
-      });
+      try {
+        this.$store.dispatch("update", {
+          ...item,
+          completed: !item.completed,
+        });
+      } catch (e) {
+        console.warn(e);
+      }
     },
     archive(item) {
-      this.$store.dispatch("update", {
-        ...item,
-        archived: !item.archived,
-      });
+      try {
+        this.$store.dispatch("update", {
+          ...item,
+          archived: !item.archived,
+        });
+      } catch (e) {
+        console.warn(e);
+      }
     },
     remove(item) {
-      this.$store.dispatch("remove", item.id);
+      try {
+        this.$store.dispatch("remove", item.id);
+      } catch (e) {
+        console.warn(e);
+      }
     },
   },
 };
