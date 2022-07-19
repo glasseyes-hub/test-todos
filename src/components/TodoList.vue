@@ -24,7 +24,7 @@
       <v-row justify="center">
         <v-col cols="12">
           <h2 class="h2 white--text mb-4 ml-4">Ваши задачи</h2>
-          <v-card flat class="white rounded-xl pa-4" cols="4">
+          <v-card flat class="white rounded-xl pa-4">
             <TodoGroup
               v-for="([type, title], index) in Object.entries(groups)"
               :key="index"
@@ -132,7 +132,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .todolist {
   display: flex;
   width: 100%;

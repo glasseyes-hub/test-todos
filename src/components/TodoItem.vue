@@ -48,7 +48,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .controls {
   display: none;
   gap: 4px;
