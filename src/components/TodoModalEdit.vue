@@ -1,11 +1,6 @@
 <template>
-  <v-dialog
-    class="rounded-xl pa-4"
-    :value="showModal"
-    persistent
-    max-width="400"
-  >
-    <v-card class="rounded-xl pa-4">
+  <v-dialog :value="showModal" persistent max-width="400">
+    <v-card class="pa-4">
       <v-card-title class="text-h6"> Редактировать задачу </v-card-title>
       <v-text-field
         class="mx-6"
